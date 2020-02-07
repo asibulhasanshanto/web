@@ -1,14 +1,17 @@
 <?php
+	
 	include "db.php";
 	include "functions.php";
+	
+	deleteRows();
+	?>
 
-	createRow();
-?>
 <?php include "includes/header.php"; ?>
+
 	<div class="container">
 		<div class="col-sm-6">
-			<h1 class="text-center">Create</h1>
-			<form action="login_create.php" method="post">
+		<form action="login_delete.php" method="post">
+			<h1 class="text-center">Delete</h1>
 				<div class="form-group">
 					<label for="username">Username</label>
 					<input type="text" name="name" class="form-control">
@@ -17,13 +20,16 @@
 					<label for="password">Password</label>
 					<input type="password" name="pass" class="form-control">
 				</div>
-				<!-- <div class="form-group">
+				<div class="form-group">
 					<select name="id" id="">
-						<option value="">1</option>
+						<?php
+							showAllData();
+						?>
+						
 					</select>
 					
-				</div> -->
-				<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+				</div>
+				<input class="btn btn-primary" type="submit" name="submit" value="Delete">
 			</form>
 		</div>
-	<?php include "includes/footer.php";?> 
+<?php include "includes/footer.php";?> 
