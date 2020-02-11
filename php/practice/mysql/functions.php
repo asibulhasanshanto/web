@@ -12,7 +12,7 @@ function createRow()
 		$password = mysqli_real_escape_string($connection,$password);
 
 		$hashFormat = "$2y$10$"; 
-		$salt = "thisfunctionwillmakehf";// i put here 22 characters
+		$salt = "thisfunctionwillmakehf";// i put here 22 characters 
 		$hashF_and_salt = $hashFormat.$salt;
 
 		$password = crypt($password,$hashF_and_salt);

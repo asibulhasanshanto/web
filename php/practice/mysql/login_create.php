@@ -17,12 +17,6 @@
 					<label for="password">Password</label>
 					<input type="password" name="pass" class="form-control">
 				</div>
-				<!-- <div class="form-group">
-					<select name="id" id="">
-						<option value="">1</option>
-					</select>
-					
-				</div> -->
 				<input class="btn btn-primary" type="submit" name="submit" value="Submit">
 			</form>
 		</div>
