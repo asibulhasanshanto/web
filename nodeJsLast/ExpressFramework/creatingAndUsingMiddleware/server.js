@@ -23,7 +23,9 @@ Server bootup or server export
 */
 const express = require('express') 
 const app = express() 
+const bodyParser = require('body-parser')//importing deafult middlewire
 
+app.use(bodyParser.json())
 app.use((req,res,next) =>{// this is a middleware.middlewire is just an object
 	console.log(`${req.method}: ${req.url}`)
 	next()
@@ -47,7 +49,8 @@ app.get('/accounts', (req,res,next)=>{
 (req, res) => {
   res.send({msg:'accounts'})
 })
-app.get('/transactions', (req, res) => {//these app.get functions are called endpoints
+app.post('/transactions', (req, res) => {//these app.get functions are called endpoints
+  console.log(req.body)
   res.send({msg:'transactions'})
 })
 app.use((error,req,res,next)=>{//error handaler
