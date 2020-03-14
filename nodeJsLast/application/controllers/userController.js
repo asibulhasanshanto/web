@@ -20,7 +20,7 @@ exports.getAllUser = async(req,res) =>{
 }
 exports.getUser = async(req,res) =>{
     try {
-        const user = await User.findById(req.params.id)
+        const user = await User.find({name: req.params.id})
         res.status(200).json({
             status: "ok",
             data: {
