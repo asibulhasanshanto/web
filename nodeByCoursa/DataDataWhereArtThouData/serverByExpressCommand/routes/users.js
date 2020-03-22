@@ -38,7 +38,7 @@ router.post('/login',passport.authenticate('local'), (req,res) =>{
   res.json({success: true,token:token, status: 'Logged in'});
 });
 
-router.get('/logout', (req,res)=>{
+router.get('/logout', (req,res,next)=>{
   if(req.session) {
     req.session.destroy();
     res.clearCookie('session-id');
