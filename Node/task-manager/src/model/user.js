@@ -7,7 +7,7 @@ const User = mongoose.model('User', {
         required: true,
         trim: true
     },
-    password: {
+    password: { 
         type: String,
         required: true,
         trim:true,
