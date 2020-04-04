@@ -44,7 +44,19 @@ router.post('/users/login',async(req,res) =>{
         res.send({user, token})
         console.log("logged in")
     } catch (e) {
-        res.status(400).send()
+        res.status(400).send(e)
+    }
+})
+
+router.post('/users/logout',auth,async(req,res)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((token)=>{
+            return token.token !== req.token
+        })
+        await req.user.save()
+        res.send('logged out')
+    } catch(e) {
+        res.status(500).send("error")
     }
 })
 
@@ -84,5 +96,6 @@ router.delete('/users/:id',async (req,res)=>{
         res.status(500).send(e)
     }
 })
+
 
 module.exports = router

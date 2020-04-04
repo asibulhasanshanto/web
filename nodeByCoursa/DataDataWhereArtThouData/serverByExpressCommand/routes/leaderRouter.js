@@ -17,7 +17,7 @@ leaderRouter.route('/')
     },(err) => next(err))
     .catch((err)=> next(err));
 })
-.post(authentivatr.varifyUser,(req,res,next) =>{
+.post(authenticate.varifyUser,(req,res,next) =>{
     Leaders.create(req.body)
     .then((leader) => {
         console.log('Leader created ', leader);

@@ -17,7 +17,10 @@ var leaderRouter = require('./routes/leaderRouter');
 const mongoose = require('mongoose');
 const Dishes = require('./models/dishes');
 const url = config.mongoUrl;
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(url,{
+  useNewUrlParser: true ,
+  useUnifiedTopology: true 
+});
 connect.then((db) =>{
   console.log('Connected to the server');
 }, (err) => {console.log(err);});
