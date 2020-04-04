@@ -8,7 +8,7 @@ const Leaders = require('./../models/leaders');
 const leaderRouter = express.Router()
 leaderRouter.use(bodyParser.json())
 leaderRouter.route('/')
-.get(authenticate.varifyUser,(req,res,next) =>{
+.get(authenticate.varifyUser,authenticate.verifyAdmin,(req,res,next) =>{
     Leaders.find({})
     .then((leaders) =>{
         res.statusCode = 200;

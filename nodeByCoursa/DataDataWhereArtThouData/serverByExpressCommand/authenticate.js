@@ -12,7 +12,7 @@ passport.deserializeUser(User.deserializeUser());//does things for session suppo
 
 exports.getToken = function(user) {
     return jwt.sign(user, config.secretKey,
-        {expiresIn: 3600});
+        {expiresIn: 36000});
 };
 
 var opts = {}
@@ -21,7 +21,7 @@ opts.secretOrKey = config.secretKey;
 
 exports.jwtPassport = passport.use(new JwtStrategy(opts, 
     (jwt_payload, done) =>{
-        console.log("JWT payload: ", jwt_payload);
+        //console.log("JWT payload: ", jwt_payload);
         User.findOne({_id:jwt_payload._id}, (err, user)=>{
             if(err) {
                 return done(err,false);
@@ -37,3 +37,13 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
     exports.varifyUser = passport.authenticate('jwt', {session: false});
 
     
+
+    exports.verifyAdmin = function(req,res,next){
+        console.log("JWT payload: ", jwt_payload);
+        next()
+        // if(req.user.admin !== true)  {
+        //     return next(err);
+        // }else {
+        //     return next();
+        // }
+    };
