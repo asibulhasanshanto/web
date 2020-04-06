@@ -38,13 +38,23 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
     
 
-    exports.verifyAdmin = function(req,res,next,jwt_payload){
-        console.log("JWT payload: ", jwt_payload);
-        console.log("hello")
-        next()
-        // if(req.user.admin !== true)  {
-        //     return next(err);
-        // }else {
-        //     return next();
-        // }
-    };
+        exports.verifyAdmin = ((req,res,next) =>{
+            const name = req.body.username
+            console.log(name)
+            User.findOne({username: name},(err,user) => { 
+                if(err) {
+                    next(err)
+                }
+                else if(!user) {
+                    next(new Error("user not found"))
+                }
+                else {
+                    if(!user.admin) {
+                        next(new Error("you are not an admin"))
+                    }
+                    else {
+                        next()
+                    }
+                }                         
+            });
+        });
