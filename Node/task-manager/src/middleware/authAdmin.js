@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const User = require("../model/user")
 
-const auth = async (req, res, next) =>{
+const verifyAdmin = async (req, res, next) =>{
     try{
         const token = req.header('Authorization').replace('Bearer ','')
         const decoded = jwt.verify(token, 'thisismykey')
@@ -10,6 +10,10 @@ const auth = async (req, res, next) =>{
         if(!user) {
             throw new Error()
         }
+        else if(!(user.admin)) {
+            throw new Error()
+        }
+        console.log(user.admin)
         req.token = token
         req.user = user
         next()
@@ -17,5 +21,4 @@ const auth = async (req, res, next) =>{
         res.status(401).send({error:"please authenticate"})
     }
 }
-module.exports = auth
-
+module.exports = verifyAdmin
