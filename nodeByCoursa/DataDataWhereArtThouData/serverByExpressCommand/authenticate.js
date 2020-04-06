@@ -38,8 +38,9 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
     
 
-    exports.verifyAdmin = function(req,res,next){
+    exports.verifyAdmin = function(req,res,next,jwt_payload){
         console.log("JWT payload: ", jwt_payload);
+        console.log("hello")
         next()
         // if(req.user.admin !== true)  {
         //     return next(err);
