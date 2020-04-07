@@ -38,23 +38,32 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
     
 
-        exports.verifyAdmin = ((req,res,next) =>{
-            const name = req.body.username
-            console.log(name)
-            User.findOne({username: name},(err,user) => { 
-                if(err) {
-                    next(err)
-                }
-                else if(!user) {
-                    next(new Error("user not found"))
-                }
-                else {
-                    if(!user.admin) {
-                        next(new Error("you are not an admin"))
-                    }
-                    else {
-                        next()
-                    }
-                }                         
-            });
-        });
+// exports.verifyAdmin = ((req,res,next) =>{
+//     const name = req.body.username
+//     User.findOne({username: name},(err,user) => { 
+//         if(err) {
+//             next(err)
+//         }
+//         else if(!user) {
+//             next(new Error("user not found"))
+//         }
+//         else {
+//             if(!user.admin) {
+//                 next(new Error("you are not an admin"))
+//             }
+//             else {
+//                 next()
+//             }
+//         }                         
+//     });
+// });
+
+exports.verifyAdmin = function(params, err, next) {
+    if (params.user.admin){
+      return next();
+    } else {
+      var err = new Error('Only administrators are authorized to perform this operation.');
+      err.status = 403;
+      return next(err);
+    }
+};
