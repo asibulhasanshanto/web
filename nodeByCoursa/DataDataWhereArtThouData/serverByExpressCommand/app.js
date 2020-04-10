@@ -19,7 +19,7 @@ const Dishes = require('./models/dishes');
 const url = config.mongoUrl;
 const connect = mongoose.connect(url,{
   useNewUrlParser: true ,
-  useUnifiedTopology: true 
+  useUnifiedTopology: true  
 });
 connect.then((db) =>{
   console.log('Connected to the server');
