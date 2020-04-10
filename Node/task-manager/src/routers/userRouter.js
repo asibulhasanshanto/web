@@ -13,7 +13,7 @@ router.get('/users',auth,async (req,res) =>{
     }
 })
 
-router.get('/users/:id',async (req,res) =>{
+router.get('/users/:id',auth,async (req,res) =>{
 
     try {
         const user = await User.findById(req.params.id)
@@ -26,7 +26,7 @@ router.get('/users/:id',async (req,res) =>{
     }
 })
 
-router.post('/users', async (req, res) =>{
+router.post('/users',auth,  async (req, res) =>{
     const user = new User(req.body)
     try {
         await user.save()
@@ -61,7 +61,7 @@ router.post('/users/logout',auth,async(req,res)=>{
     }
 })
 
-router.patch('/users/:id',async (req,res)=>{
+router.patch('/users/:id',auth,async (req,res)=>{
     const updates = Object.keys(req.body)
     const allowUpdates = ['name', 'email','password','age']
     const isValidOperation = updates.every((update)=> allowUpdates.includes(update))
@@ -85,7 +85,7 @@ router.patch('/users/:id',async (req,res)=>{
     }
 })
 
-router.delete('/users/:id',async (req,res)=>{
+router.delete('/users/:id',auth,async (req,res)=>{
     try {
         const user = await User.findByIdAndDelete(req.params.id)
 
